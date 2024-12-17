@@ -8,110 +8,109 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sistema de Agendamento</h1>
+    <div class="container-primario">
+
+        <header class="title">
+            <img src="img/nova-logo-branca 1.png" alt="Logo Smie Saúde" class="title-image">
+            <h2>Sistema de Agendamento</h2>
         </header>
 
-        <!-- #1# Fluxo para Criar Agenda -->
-        <section id="criar-agenda">
-            <h2>Criar Agenda</h2>
-            <div>
-                <label for="unidade">Selecione a Unidade:</label>
-                <select id="unidade">
-                    <option value="">Selecione...</option>
-                    <option value="1">Unidade 1</option>
-                    <option value="2">Unidade 2</option>
-                </select>
-            </div>
-            <div id="corpo-clinico" class="hidden">
-                <h3>Corpo Clínico Ativo</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Conselho</th>
-                            <th>Nº Conselho</th>
-                            <th>UF</th>
-                            <th>Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Dados simulados -->
-                        <tr>
-                            <td>001</td>
-                            <td>Dr. João Silva</td>
-                            <td>CRM</td>
-                            <td>123456</td>
-                            <td>SP</td>
-                            <td><button class="btn criar-agenda">Criar Agenda</button></td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>Dr. Maria Souza</td>
-                            <td>CRM</td>
-                            <td>654321</td>
-                            <td>RJ</td>
-                            <td><button class="btn criar-agenda">Criar Agenda</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- #2# Fluxo para Agendamento de Beneficiários -->
-        <section id="agendar-atendimento">
-            <h2>Agendar Atendimento</h2>
-            <button id="btn-agendar">Agendar Atendimento</button>
-            <div id="form-agendamento" class="hidden">
-                <label for="carteirinha">Número da Carteirinha:</label>
-                <input type="text" id="carteirinha">
-                <button id="verificar-beneficiario">Verificar Beneficiário</button>
-            </div>
-        </section>
-
-        <!-- #3# Verificação de Disponibilidade de Horários -->
-        <section id="disponibilidade-horarios">
-            <h2>Verificação de Disponibilidade</h2>
-            <div>
-                <label for="filtro-especialidade">Especialidade:</label>
-                <input type="text" id="filtro-especialidade">
-                <label for="filtro-profissional">Profissional:</label>
-                <input type="text" id="filtro-profissional">
-                <label for="filtro-local">Local:</label>
-                <input type="text" id="filtro-local">
-                <button id="buscar-disponibilidade">Buscar</button>
-            </div>
-            <div id="resultado-disponibilidade" class="hidden">
-                <h3>Horários Disponíveis</h3>
-                <!-- Simulação de horários disponíveis -->
-                <ul>
-                    <li>Segunda-feira: 10h, 14h</li>
-                    <li>Terça-feira: 09h, 15h</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- #4# Agendamento Sequencial -->
-        <section id="agendamento-sequencial">
-            <h2>Agendamento Sequencial</h2>
-            <form>
-                <label for="intervalo">Intervalo entre sessões:</label>
-                <select id="intervalo">
-                    <option value="semanal">Semanal</option>
-                    <option value="quinzenal">Quinzenal</option>
-                </select>
-
-                <label for="total-sessoes">Número total de sessões:</label>
-                <input type="number" id="total-sessoes" min="1">
-
-                <label for="horario-fixo">Horário fixo:</label>
-                <input type="time" id="horario-fixo">
-
-                <button type="submit">Confirmar Agendamento</button>
-            </form>
-        </section>
+        <div class="container">
+            
+            <!-- #1# Fluxo para Criar Agenda -->
+            <section id="criar-agenda">
+                <h2>Criar Agenda</h2>
+                <div>
+                    <label for="unidade">Selecione a Unidade:</label>
+                    <select id="unidade">
+                        <option value="">Selecione...</option>
+                        <option value="1">Unidade 1</option>
+                        <option value="2">Unidade 2</option>
+                    </select>
+                </div>
+                <div id="corpo-clinico" class="hidden">
+                    <h3>Corpo Clínico Ativo</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Conselho</th>
+                                <th>Nº Conselho</th>
+                                <th>UF</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dados simulados -->
+                            <tr>
+                                <td>001</td>
+                                <td>Dr. João Silva</td>
+                                <td>CRM</td>
+                                <td>123456</td>
+                                <td>SP</td>
+                                <td><button class="btn criar-agenda">Criar Agenda</button></td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>Dr. Maria Souza</td>
+                                <td>CRM</td>
+                                <td>654321</td>
+                                <td>RJ</td>
+                                <td><button class="btn criar-agenda">Criar Agenda</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- #2# Fluxo para Agendamento de Beneficiários -->
+            <section id="agendar-atendimento">
+                <h2>Agendar Atendimento</h2>
+                <button id="btn-agendar">Agendar Atendimento</button>
+                <div id="form-agendamento" class="hidden">
+                    <label for="carteirinha">Número da Carteirinha:</label>
+                    <input type="text" id="carteirinha">
+                    <button id="verificar-beneficiario">Verificar Beneficiário</button>
+                </div>
+            </section>
+            <!-- #3# Verificação de Disponibilidade de Horários -->
+            <section id="disponibilidade-horarios">
+                <h2>Verificação de Disponibilidade</h2>
+                <div>
+                    <label for="filtro-especialidade">Especialidade:</label>
+                    <input type="text" id="filtro-especialidade">
+                    <label for="filtro-profissional">Profissional:</label>
+                    <input type="text" id="filtro-profissional">
+                    <label for="filtro-local">Local:</label>
+                    <input type="text" id="filtro-local">
+                    <button id="buscar-disponibilidade">Buscar</button>
+                </div>
+                <div id="resultado-disponibilidade" class="hidden">
+                    <h3>Horários Disponíveis</h3>
+                    <!-- Simulação de horários disponíveis -->
+                    <ul>
+                        <li>Segunda-feira: 10h, 14h</li>
+                        <li>Terça-feira: 09h, 15h</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- #4# Agendamento Sequencial -->
+            <section id="agendamento-sequencial">
+                <h2>Agendamento Sequencial</h2>
+                <form>
+                    <label for="intervalo">Intervalo entre sessões:</label>
+                    <select id="intervalo">
+                        <option value="semanal">Semanal</option>
+                        <option value="quinzenal">Quinzenal</option>
+                    </select>
+                    <label for="total-sessoes">Número total de sessões:</label>
+                    <input type="number" id="total-sessoes" min="1">
+                    <label for="horario-fixo">Horário fixo:</label>
+                    <input type="time" id="horario-fixo">
+                    <button type="submit">Confirmar Agendamento</button>
+                </form>
+            </section>
+        </div>
     </div>
 
     <script src="js/script.js"></script>
