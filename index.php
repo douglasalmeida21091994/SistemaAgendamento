@@ -17,9 +17,12 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
     <title>Sistema de Agendamento</title>
     <link rel="stylesheet" href="css/style.css">
     
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ1QKZj6HJ1utD9ytpMbbL1t4ksmOlFqd5F2l1Ejhs8jGh5zBbYaS0luQk8f" crossorigin="anonymous">
+    
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    
+
     <!-- jQuery (necessário para o DataTables) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -50,8 +53,7 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
                     </select>
                 </div>
 
-                <div id="corpo-clinico" class="hidden">
-                    <h3>Corpo Clínico Ativo</h3>
+                <div id="corpo-clinico" class="hidden">                    
                     <table id="medicosTabela" class="display">
                         <thead>
                             <tr>

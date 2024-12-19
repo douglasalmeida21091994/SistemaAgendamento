@@ -1,11 +1,9 @@
 $(document).ready(function() {
     var table;
 
-    // Função para inicializar ou reinicializar o DataTable
     function initDataTable() {
         if ($.fn.dataTable.isDataTable('#medicosTabela')) {
-            table.destroy(); // Destruir tabela atual antes de recriar
-            $('#medicosTabela tbody').empty(); // Limpa o conteúdo da tabela
+            table.destroy();
         }
         
         table = $('#medicosTabela').DataTable({
@@ -31,32 +29,23 @@ $(document).ready(function() {
 
     const unidadeSelect = document.getElementById("unidade");
     const corpoClinicoSection = document.getElementById("corpo-clinico");
-    const medicosTabela = document.getElementById("medicos-tabela");
 
-    // Função para mostrar loading
-    function showLoading() {
-        medicosTabela.innerHTML = "<tr><td colspan='5' class='text-center'>Carregando médicos...</td></tr>";
-    }
-
-    // Função para limpar a tabela
     function limparTabela() {
         if ($.fn.dataTable.isDataTable('#medicosTabela')) {
             table.destroy();
+            $('#medicosTabela tbody').empty();
         }
-        $('#medicosTabela tbody').empty();
     }
 
-    // Função para buscar médicos com base na unidade selecionada
     function buscarMedicos(unidadeId) {
-        // Limpar tabela atual
-        limparTabela();
-        
         if (!unidadeId || unidadeId === "") {
             console.error("ID da unidade inválido");
             return;
         }
 
-        showLoading();
+        // Limpar a tabela antes de buscar novos dados
+        limparTabela();
+        
         corpoClinicoSection.classList.remove("hidden");
         
         fetch(`queries/buscar_medicos.php?unidade_id=${encodeURIComponent(unidadeId)}`)
@@ -67,28 +56,32 @@ $(document).ready(function() {
                 return response.text();
             })
             .then(data => {
-                medicosTabela.innerHTML = data;
+                // Limpar e adicionar novos dados
+                $('#medicosTabela tbody').empty();
+                $('#medicosTabela tbody').html(data);
+                
+                // Reinicializar DataTable com novos dados
                 initDataTable();
             })
             .catch(error => {
                 console.error('Erro:', error);
-                medicosTabela.innerHTML = "<tr><td colspan='5'>Erro ao carregar médicos</td></tr>";
+                $('#medicosTabela tbody').html("<tr><td colspan='5'>Erro ao carregar médicos</td></tr>");
             });
     }
 
-    // Event listener para mudanças no select de unidade
     unidadeSelect.addEventListener("change", function() {
         const unidadeId = this.value;
-
+        
         if (unidadeId === "selecione") {
             corpoClinicoSection.classList.add("hidden");
             limparTabela();
         } else {
+            // Sempre buscar novos dados ao trocar de unidade
             buscarMedicos(unidadeId);
         }
     });
 
-    // Ao carregar a página
+    // Inicialização ao carregar a página
     if (unidadeSelect.value === "selecione") {
         corpoClinicoSection.classList.add("hidden");
     } else {
