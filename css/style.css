@@ -33,7 +33,7 @@ body {
 
 /* Container centralizado */
 .container {
-    max-width: 1250px;
+    width: 1300px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -127,16 +127,18 @@ ul li {
 .btn {
     display: inline-block;
     padding: 8px 12px;
-    background-color: #28a745;
+    background-color: #8fa8d5;
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
     font-size: 14px;
     cursor: pointer;
+    transition: all 0.3s ease-in;
 }
 
 .btn:hover {
-    background-color: #218838;
+    background-color: #4e7dd2;
+    transition: all 0.3s ease-in;
 }
 
 /* Estilos do Modal */
@@ -157,7 +159,7 @@ ul li {
 .modal-content {
     background-color: #fefefe;
     border: 1px solid #888;
-    width: 80%;
+    width: 1300px;
     border-radius: 5px;
     position: relative;
     margin: 0;
