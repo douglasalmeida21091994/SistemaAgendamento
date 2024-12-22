@@ -48,6 +48,12 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
     </header>
     <div class="container-primario">
 
+        <div class="buttons">
+            <div class="btn-option">Criar Agenda</div>
+            <div class="btn-option">Agendar Atendimento</div>
+            <div class="btn-option">3 ou Mais Faltas Seguidas</div>
+        </div>
+
         <div class="container">
             <!-- Fluxo para Criar Agenda -->
             <section id="criar-agenda">
@@ -55,7 +61,7 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
                 <div>
                     <label for="unidade">Selecione a Unidade:</label>
                     <select id="unidade">
-                        <option value="selecione">Selecione...</option>
+                        <!-- <option value="selecione">Selecione...</option> -->
                         <?php foreach ($unidades as $unidade): ?>
                             <option value="<?= htmlspecialchars($unidade['cod']) ?>">
                                 <?= htmlspecialchars($unidade['nome']) ?>

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var table;
 
     function initDataTable() {
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
         limparTabela();
         corpoClinicoSection.classList.remove("hidden");
-        
+
         fetch(`queries/buscar_medicos.php?unidade_id=${encodeURIComponent(unidadeId)}`)
             .then(response => {
                 if (!response.ok) {
@@ -79,9 +79,9 @@ $(document).ready(function() {
             });
     }
 
-    unidadeSelect.addEventListener("change", function() {
+    unidadeSelect.addEventListener("change", function () {
         const unidadeId = this.value;
-        
+
         if (unidadeId === "selecione") {
             corpoClinicoSection.classList.add("hidden");
             limparTabela();
@@ -90,6 +90,7 @@ $(document).ready(function() {
         }
     });
 
+    // RETIREI/COMENTEI O SELECIONE DO INDEX
     if (unidadeSelect.value === "selecione") {
         corpoClinicoSection.classList.add("hidden");
     } else {
@@ -102,11 +103,11 @@ $(document).ready(function() {
 
     function abrirModal(medicoData) {
         limparCamposModal();
-        
+
         if (medicoData) {
             carregarDadosMedico(medicoData);
             document.querySelector('#agenda-modal h1').textContent = medicoData.nome;
-            
+
             // Buscar e carregar especialidades
             buscarEspecialidades(medicoData.cod)
                 .then(options => {
@@ -115,7 +116,7 @@ $(document).ready(function() {
                     }
                 });
         }
-        
+
         modal.style.removeProperty('display');
         modal.classList.add('modal-active');
         document.body.style.overflow = 'hidden';
@@ -132,12 +133,12 @@ $(document).ready(function() {
     function limparCamposModal() {
         document.getElementById('vigencia-inicio').value = '';
         document.getElementById('vigencia-fim').value = '';
-        
+
         const botoesDias = document.querySelectorAll('#dias button');
         botoesDias.forEach(botao => {
             botao.classList.remove('selected');
         });
-        
+
         document.getElementById('tipo').selectedIndex = 0;
         document.getElementById('contratacao').selectedIndex = 0;
         document.getElementById('beneficiarios').value = '';
@@ -170,35 +171,86 @@ $(document).ready(function() {
 
     span.onclick = fecharModal;
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target === modal) {
             fecharModal();
         }
     }
 
     document.querySelectorAll('#dias button').forEach(button => {
-        button.onclick = function() {
+        button.onclick = function () {
             this.classList.toggle('selected');
         }
     });
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         const iconElement = e.target.closest('.criar-agenda');
-        
+
         if (iconElement) {
             const row = iconElement.closest('tr');
-            
+
             if (row) {
                 const medicoData = {
                     cod: row.cells[0].textContent,
                     nome: row.cells[1].textContent,
                     conselho: row.cells[2].textContent
                 };
-                
+
                 abrirModal(medicoData);
             } else {
                 abrirModal();
             }
         }
     });
+
+    /////////////////////// ADD FUNCTION DOS BUTTONS ACTIVE
+
+    $(document).ready(function () {
+        // Inicializa variáveis
+        const buttons = document.querySelectorAll('.btn-option');
+        const sections = document.querySelectorAll('section');
+
+        // Função para ativar o botão e mostrar a seção
+        function ativarBotao(botaoClicado) {
+            // Remove a classe ativa de todos os botões e oculta todas as seções
+            buttons.forEach(btn => btn.classList.remove('active'));
+            sections.forEach(sec => sec.classList.add('hidden'));
+
+            // Adiciona a classe ativa ao botão clicado e exibe a seção correspondente
+            botaoClicado.classList.add('active');
+            const sectionId = botaoClicado.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+        }
+
+        // Adiciona eventos de clique aos botões
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                ativarBotao(this);
+            });
+        });
+
+        // Define o botão "Criar Agenda" como ativo por padrão
+        const defaultButton = document.querySelector('.btn-option:nth-child(1)');
+        if (defaultButton) {
+            ativarBotao(defaultButton);
+        }
+    });
+
+    // ADICIONANDO ACTIVE PARA SELECIONAR OS DIAS DA SEMANA
+
+    // Selecionar todos os botões dentro do elemento #dias
+    const botoesDias = document.querySelectorAll('#dias button');
+
+    // Adicionar um evento de clique para cada botão
+    botoesDias.forEach(botao => {
+        botao.addEventListener('click', function () {
+            // Alternar a classe 'active' ao clicar
+            this.classList.toggle('active');
+        });
+    });
+
+
 });

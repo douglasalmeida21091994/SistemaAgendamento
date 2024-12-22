@@ -8,9 +8,9 @@ body {
 }
 
 /* Estilo para o título da página */
-.title {    
+.title {
     text-align: center;
-    background-image: linear-gradient(135deg, rgb(75,63,197) 0%,rgb(79,145,214) 100%);
+    background-image: linear-gradient(135deg, rgb(75, 63, 197) 0%, rgb(79, 145, 214) 100%);
     margin-top: 0;
     text-transform: uppercase;
     color: #fff;
@@ -23,12 +23,50 @@ body {
 
 .title-image {
     position: absolute;
-    left: 20px;    
+    left: 20px;
 }
 
 /* Ajustes no título dentro da seção */
-#criar-agenda > h2 {
+#criar-agenda>h2 {
     margin: 0;
+}
+
+.buttons {
+    width: 100%;
+    /* background-color: #333; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-option {
+    border: 1px solid #4E7DD2;
+    color: #4E7DD2;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* .btn-option:hover {
+    scale: 1.1;
+    transition: all 0.3s ease;
+} */
+
+.btn-option.active {
+    background-color: #4E7DD2;
+    border: 1px solid #4E7DD2;
+    color: #fff;
+    scale: 1.1;
+    font-weight: bold;
+}
+
+
+#unidade {
+    width: 400px;
 }
 
 /* Container centralizado */
@@ -59,7 +97,9 @@ label {
     font-weight: bold;
 }
 
-input, select, button {
+input,
+select,
+button {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -68,15 +108,33 @@ input, select, button {
 }
 
 button {
-    background-color: #4E7DD2;
-    color: #fff;
+    border: 1px solid #4E7DD2;
+    color: #4E7DD2;
+    background-color: #fff;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: rgb(75,63,197);
+    background-color: #4E7DD2;
+    border: 1px solid #4E7DD2;
+    color: #fff;
+    /* scale: 1.1; */
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#dias {
+    display: flex;
+    gap: 5px;
+
+}
+
+#dias button.active {
+    background-color: #4E7DD2;
+    color: #fff;
+    border: 1px solid #4E7DD2;
 }
 
 /* Centralização do cabeçalho da tabela */
@@ -171,7 +229,7 @@ ul li {
 
 /* Estilos do header dentro do modal */
 header {
-    background-image: linear-gradient(135deg, rgb(75,63,197) 0%, rgb(79,145,214) 100%);
+    background-image: linear-gradient(135deg, rgb(75, 63, 197) 0%, rgb(79, 145, 214) 100%);
     padding: 5px;
     text-align: center;
 }
@@ -209,6 +267,7 @@ header {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -249,13 +308,10 @@ header {
     width: 350px;
 }
 
-#especialidade, #contratacao, #tipo {
+#especialidade,
+#contratacao,
+#tipo {
     width: 370px;
-}
-
-#dias {
-    display: flex;
-    gap: 5px;
 }
 
 #div-button {
@@ -269,7 +325,8 @@ header {
     text-transform: uppercase;
 }
 
-.form-envelop, .form-envelop2 {
+.form-envelop,
+.form-envelop2 {
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
@@ -282,15 +339,16 @@ header {
         height: 90vh;
         padding: 15px;
     }
-    
+
     .form-group {
         margin-bottom: 15px;
     }
 
     .form-envelop {
-        flex-direction: column; /* Organiza os itens na coluna em telas menores */
+        flex-direction: column;
+        /* Organiza os itens na coluna em telas menores */
     }
-    
+
     /* Ajustes no botão de fechar em telas pequenas */
     .close {
         font-size: 24px;
