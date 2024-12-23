@@ -364,16 +364,3 @@ document.getElementById('removeProcedimento').addEventListener('click', function
         container.removeChild(selects[selects.length - 1]); // Remove o último select
     }
 });
-
-
-// Remove o último select de procedimento
-document.getElementById('removeProcedimento').addEventListener('click', function() {
-    const container = document.getElementById('procedimentos-container');
-    
-    // Verifica se há mais de um select para remover
-    const selects = container.getElementsByClassName('form-procedimento-select');
-    if (selects.length > 1) {
-        container.removeChild(selects[selects.length - 1]); // Remove o último select
-    }
-});
-
