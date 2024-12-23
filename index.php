@@ -30,16 +30,16 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
     <!-- FullCalendar CSS -->
-<link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.css" rel="stylesheet">
 
-<!-- FullCalendar JS -->
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.min.js"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.min.js"></script>
 
-<!-- ADD SWEETALERT2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- ADD SWEETALERT2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -93,69 +93,93 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
     </div>
 
     <!-- Modal -->
-<div id="agenda-modal" class="modal">
-    <div class="modal-content">
-        <header>
-            <span class="close">&times;</span>
-            <h1></h1>
-        </header>
-        <form>
-            <div class="form-group">
-                <label for="vigencia">Vigência:</label>
-                <div class="form-div-group">
-                    <input type="date" id="vigencia-inicio">
-                    <span>até</span> 
-                    <input type="date" id="vigencia-fim">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="dia-agendamento">Dia de Agendamento:</label>
-                <div id="dias">
-                    <button type="button">SEG</button>
-                    <button type="button">TER</button>
-                    <button type="button">QUA</button>
-                    <button type="button">QUI</button>
-                    <button type="button">SEX</button>
-                    <button type="button">SAB</button>
-                </div>
-            </div>
-
-            <div class="form-envelop">
+    <div id="agenda-modal" class="modal">
+        <div class="modal-content">
+            <header>
+                <span class="close">&times;</span>
+                <h1></h1>
+            </header>
+            <form>
                 <div class="form-group">
-                    <label for="tipo">Tipo:</label>
-                    <select id="tipo">
-                        <option value="1">Ordem de chegada</option>
-                        <option value="2">Hora marcada</option>
-                        <option value="3">Hora prevista</option>
-                    </select>
+                    <label for="vigencia">Vigência:</label>
+                    <div class="form-div-group">
+                        <input type="date" id="vigencia-inicio">
+                        <span>até</span>
+                        <input type="date" id="vigencia-fim">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="contratacao">Tipo de Contratação:</label>
-                    <select id="contratacao">
-                        <option value="1">Plantão</option>
-                        <option value="2">Produção</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="form-envelop2">
                 <div class="form-group">
-                    <label for="beneficiarios">Quantidade de Beneficiários:</label>
-                    <input type="text" id="beneficiarios">
+                    <label for="dia-agendamento">Dia de Agendamento:</label>
+                    <div id="dias">
+                        <button type="button">SEG</button>
+                        <button type="button">TER</button>
+                        <button type="button">QUA</button>
+                        <button type="button">QUI</button>
+                        <button type="button">SEX</button>
+                        <button type="button">SAB</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="especialidade">Especialidade:</label>
-                    <select id="especialidade">
-                        <option>Escolha</option>
-                    </select>
-                </div>
-            </div>
 
-            <div id="div-button"><button type="submit">Cadastrar Agenda</button></div>
-        </form>
+                <div class="form-envelop">
+                    <div class="form-group">
+                        <label for="tipo">Tipo:</label>
+                        <select id="tipo">
+                            <option value="1">Ordem de chegada</option>
+                            <option value="2">Hora marcada</option>
+                            <option value="3">Hora prevista</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contratacao">Tipo de Contratação:</label>
+                        <select id="contratacao">
+                            <option value="1">Plantão</option>
+                            <option value="2">Produção</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiarios">Quantidade de Beneficiários:</label>
+                        <input type="text" id="beneficiarios">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="especialidade">Especialidade:</label>
+                        <select id="especialidade">
+                            <option>Escolha</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Procedimentos -->
+                <div id="procedimentos-container">
+                    <div class="form-procedimento-select">
+                        <label for="procedimento">Procedimento:</label>
+                        <select class="form-select procedimento">
+                            <option value="">selecione...</option>
+                            <option value="1">EM CONSULTORIO (NO HORARIO NORMAL OU PREESTABELECIDO)</option>
+                            <option value="2">EM PRONTO SOCORRO</option>
+                            <option value="4163">CONSULTA EM PSICOLOGIA</option>
+                            <option value="4169">SESSAO DE PSICOTERAPIA INDIVIDUAL</option>
+                            <option value="4180">SESSAO DE PSICOPEDAGOGIA INDIVIDUAL</option>
+                            <option value="4187">SESSAO DE PSICOMOTRICIDADE INDIVIDUAL</option>
+                            <option value="4168">CONSULTA EM TERAPIA OCUPACIONAL</option>
+                            <option value="4195">SESSAO INDIVIDUAL AMBULATORIAL, EM TERAPIA OCUPACIONAL</option>
+                            <option value="4171">SESSAO INDIVIDUAL AMBULATORIAL DE FONOAUDIOLOGIA</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Botões para adicionar/remover selects -->
+                <div id="div-button">
+                    <button type="button" id="addProcedimento">Adicionar Procedimento</button>
+                    <button type="button" id="removeProcedimento">Remover Procedimento</button>
+                    <button type="submit" id="cadastrarAgenda">Cadastrar Agenda</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+
 
     <script src="js/script.js"></script>
 

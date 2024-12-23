@@ -203,7 +203,7 @@ $(document).ready(function () {
         }
     });
 
-    /////////////////////// ADD FUNCTION DOS BUTTONS ACTIVE
+    // ADD FUNCTION DOS BUTTONS ACTIVE
 
     $(document).ready(function () {
         // Inicializa variáveis
@@ -253,8 +253,7 @@ $(document).ready(function () {
     });
 });
 
-// Função de Validação dos campos para cadastrar agenda
-
+// Função de Validação dos campos para cadastrar agenda (MODAL)
 document.querySelector('#div-button button[type="submit"]').addEventListener('click', function (e) {
     e.preventDefault(); // Evita o envio do formulário diretamente
 
@@ -265,6 +264,22 @@ document.querySelector('#div-button button[type="submit"]').addEventListener('cl
     const contratacao = document.getElementById('contratacao').value.trim();
     const beneficiarios = document.getElementById('beneficiarios').value.trim();
     const especialidade = document.getElementById('especialidade').value.trim();
+
+    // Captura a data atual
+    const dataAtual = new Date();
+
+    // Converte a data do campo para o formato Date
+    const vigenciaData = new Date(vigenciaInicio);
+
+    // Verifica se a data de vigência é maior ou igual à data atual
+    if (!vigenciaData >= dataAtual) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'A data de vigência não pode ser menor do que a data atual',
+        });
+        return;
+    }    
 
     // Verifica se ao menos um dia foi selecionado
     const diasSelecionados = document.querySelectorAll('#dias button.active').length > 0;
@@ -297,6 +312,47 @@ document.querySelector('#div-button button[type="submit"]').addEventListener('cl
         });
         return;
     }
+    
+
 
     // lógica para enviar os dados ao backend
 });
+
+// JavaScript (Para adicionar e remover os selects dinamicamente)
+// Adiciona um novo select para procedimento
+document.getElementById('addProcedimento').addEventListener('click', function() {
+    const container = document.getElementById('procedimentos-container');
+    
+    // Cria um novo select
+    const novoSelect = document.createElement('div');
+    novoSelect.classList.add('form-procedimento-select');
+    
+    novoSelect.innerHTML = `        
+        <select class="form-select procedimento">
+            <option value="">selecione...</option>
+            <option value="1">EM CONSULTORIO (NO HORARIO NORMAL OU PREESTABELECIDO)</option>
+            <option value="2">EM PRONTO SOCORRO</option>
+            <option value="4163">CONSULTA EM PSICOLOGIA</option>
+            <option value="4169">SESSAO DE PSICOTERAPIA INDIVIDUAL</option>
+            <option value="4180">SESSAO DE PSICOPEDAGOGIA INDIVIDUAL</option>
+            <option value="4187">SESSAO DE PSICOMOTRICIDADE INDIVIDUAL</option>
+            <option value="4168">CONSULTA EM TERAPIA OCUPACIONAL</option>
+            <option value="4195">SESSAO INDIVIDUAL AMBULATORIAL, EM TERAPIA OCUPACIONAL</option>
+            <option value="4171">SESSAO INDIVIDUAL AMBULATORIAL DE FONOAUDIOLOGIA</option>
+        </select>
+    `;
+    
+    container.appendChild(novoSelect); // Adiciona o novo select ao container
+});
+
+// Remove o último select de procedimento
+document.getElementById('removeProcedimento').addEventListener('click', function() {
+    const container = document.getElementById('procedimentos-container');
+    
+    // Verifica se há mais de um select para remover
+    const selects = container.getElementsByClassName('form-procedimento-select');
+    if (selects.length > 1) {
+        container.removeChild(selects[selects.length - 1]); // Remove o último select
+    }
+});
+

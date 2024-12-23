@@ -185,8 +185,8 @@ ul li {
 .btn {
     display: inline-block;
     padding: 8px 12px;
-    background-color: #8fa8d5;
-    color: #fff;
+    border: 1px solid #4E7DD2;
+    color: #4E7DD2;
     text-decoration: none;
     border-radius: 3px;
     font-size: 14px;
@@ -196,6 +196,8 @@ ul li {
 
 .btn:hover {
     background-color: #4e7dd2;
+    border: 1px solid #4E7DD2;
+    color: #fff;
     transition: all 0.3s ease-in;
 }
 
@@ -218,6 +220,7 @@ ul li {
     background-color: #fefefe;
     border: 1px solid #888;
     width: 1300px;
+    max-height: 650px;
     border-radius: 5px;
     position: relative;
     margin: 0;
@@ -314,17 +317,6 @@ header {
     width: 370px;
 }
 
-#div-button {
-    text-align: center;
-    padding: 10px 0;
-}
-
-#div-button button[type="submit"] {
-    padding: 10px 20px;
-    width: auto;
-    text-transform: uppercase;
-}
-
 .form-envelop,
 .form-envelop2 {
     display: flex;
@@ -355,4 +347,42 @@ header {
         top: 5px;
         right: 10px;
     }
+}
+
+/* AQUI */
+.form-select  {
+    margin-bottom: 10px;
+}
+
+#div-button {
+    text-align: center;
+    padding: 10px 0;
+}
+
+#div-button button[type="submit"], button[type="button"] {
+    padding: 10px 20px;
+    width: 250px;
+    text-transform: uppercase;
+}
+
+#addProcedimento {
+    border: 1px solid rgb(47, 110, 47);
+    color: rgb(47, 110, 47);
+}
+
+#addProcedimento:hover {
+    border: 1px solid rgb(47, 110, 47);
+    background-color: rgb(47, 110, 47);
+    color: #fff;
+}
+
+#removeProcedimento {
+    border: 1px solid rgb(216, 85, 85);
+    color: rgb(216, 85, 85);
+}
+
+#removeProcedimento:hover {
+    border: 1px solid rgb(216, 85, 85);
+    background-color: rgb(216, 85, 85);
+    color: #fff;
 }

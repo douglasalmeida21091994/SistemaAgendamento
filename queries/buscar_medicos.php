@@ -44,7 +44,7 @@ if (isset($_GET['unidade_id'])) {
                 echo "<td>" . htmlspecialchars($medico['medico_nome']) . "</td>";
                 echo "<td>" . htmlspecialchars($medico['especialidade_nome'] ?? '-') . "</td>";
                 echo "<td>" . htmlspecialchars($medico['crm'] ?? '-') . "</td>";
-                echo "<td><i class='btn criar-agenda fa-solid fa-magnifying-glass' data-nome='" . htmlspecialchars($medico['medico_nome']) . "'></i></td>";
+                echo "<td><i class='btn criar-agenda fa-solid fa-calendar-plus' data-nome='" . htmlspecialchars($medico['medico_nome']) . "'></i></td>";
                 echo "</tr>";
             }
         } else {
