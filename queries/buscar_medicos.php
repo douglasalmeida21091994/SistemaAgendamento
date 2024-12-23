@@ -14,23 +14,37 @@ if (isset($_GET['unidade_id'])) {
 
     try {
         $stmt = $conn->prepare("
-            SELECT rc.cod, rc.nome, rc.crm
-            FROM redecorpoclinico rc
-            JOIN rededadosgerais rg ON rc.credenciado = rg.cod
-            WHERE rg.cod = :unidadeId
+            SELECT 
+                rc.cod AS medico_cod,
+                rc.nome AS medico_nome,
+                rc.crm,
+                re.nome AS especialidade_nome
+            FROM 
+                redecorpoclinico rc
+            LEFT JOIN 
+                rededadosgerais rg ON rc.credenciado = rg.cod
+            LEFT JOIN 
+                redeespecialidadecorpoclinico rec ON rc.cod = rec.medico
+            LEFT JOIN 
+                redeespecialidades re ON rec.especialidade = re.cod
+            WHERE 
+                rg.cod = :unidadeId
         ");
-        
+
         $stmt->execute(['unidadeId' => $unidadeId]);
-        
+
         $medicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         
+
         if ($medicos) {
             foreach ($medicos as $medico) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($medico['cod']) . "</td>";
-                echo "<td>" . htmlspecialchars($medico['nome']) . "</td>";
-                echo "<td>" . htmlspecialchars($medico['crm']) . "</td>";            
-                echo "<td><i class='btn criar-agenda fa-solid fa-magnifying-glass' data-nome='" . htmlspecialchars($medico['nome']) . "'></i></td>";
+                echo "<td>" . htmlspecialchars($medico['medico_cod']) . "</td>";
+                echo "<td>" . htmlspecialchars($medico['medico_nome']) . "</td>";
+                echo "<td>" . htmlspecialchars($medico['especialidade_nome'] ?? '-') . "</td>";
+                echo "<td>" . htmlspecialchars($medico['crm'] ?? '-') . "</td>";
+                echo "<td><i class='btn criar-agenda fa-solid fa-magnifying-glass' data-nome='" . htmlspecialchars($medico['medico_nome']) . "'></i></td>";
                 echo "</tr>";
             }
         } else {
@@ -42,7 +56,8 @@ if (isset($_GET['unidade_id'])) {
     }
 }
 
-// Função para buscar especialidades
+
+// Função para buscar especialidades para cadastrar na agenda (MODAL)
 if (isset($_GET['medico_id'])) {
     $medicoId = $_GET['medico_id'];
     error_log("Médico ID recebido: " . $medicoId);
@@ -61,7 +76,7 @@ if (isset($_GET['medico_id'])) {
 
         if ($especialidades) {
             foreach ($especialidades as $especialidade) {
-                echo "<option value='" . htmlspecialchars($especialidade['cod']) . "'>" . 
+                echo "<option value='" . htmlspecialchars($especialidade['cod']) . "'>" .
                     htmlspecialchars($especialidade['nome']) . "</option>";
             }
         } else {
@@ -72,4 +87,3 @@ if (isset($_GET['medico_id'])) {
         echo "<option value=''>Erro ao carregar especialidades</option>";
     }
 }
-?>

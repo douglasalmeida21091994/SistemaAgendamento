@@ -298,5 +298,5 @@ document.querySelector('#div-button button[type="submit"]').addEventListener('cl
         return;
     }
 
-    // Aqui você pode inserir a lógica para enviar os dados ao backend
+    // lógica para enviar os dados ao backend
 });

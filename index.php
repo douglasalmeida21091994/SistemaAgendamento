@@ -78,6 +78,7 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
                             <tr>
                                 <th>Cod</th>
                                 <th>Nome</th>
+                                <th>Especialidade</th>
                                 <th>Nº Conselho</th>
                                 <th>Ação</th>
                             </tr>
