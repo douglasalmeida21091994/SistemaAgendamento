@@ -128,6 +128,7 @@ $(document).ready(function () {
         setTimeout(() => {
             modal.style.display = 'none';
         }, 300);
+        limparCamposModal();
     }
 
     function limparCamposModal() {
@@ -171,11 +172,11 @@ $(document).ready(function () {
 
     span.onclick = fecharModal;
 
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            fecharModal();
-        }
-    }
+    // window.onclick = function (event) {
+    //     if (event.target === modal) {
+    //         fecharModal();
+    //     }
+    // }
 
     document.querySelectorAll('#dias button').forEach(button => {
         button.onclick = function () {
@@ -312,38 +313,58 @@ document.querySelector('#div-button button[type="submit"]').addEventListener('cl
         });
         return;
     }
-    
-
 
     // lógica para enviar os dados ao backend
 });
 
-// JavaScript (Para adicionar e remover os selects dinamicamente)
 // Adiciona um novo select para procedimento
 document.getElementById('addProcedimento').addEventListener('click', function() {
     const container = document.getElementById('procedimentos-container');
     
-    // Cria um novo select
-    const novoSelect = document.createElement('div');
-    novoSelect.classList.add('form-procedimento-select');
-    
-    novoSelect.innerHTML = `        
-        <select class="form-select procedimento">
-            <option value="">selecione...</option>
-            <option value="1">EM CONSULTORIO (NO HORARIO NORMAL OU PREESTABELECIDO)</option>
-            <option value="2">EM PRONTO SOCORRO</option>
-            <option value="4163">CONSULTA EM PSICOLOGIA</option>
-            <option value="4169">SESSAO DE PSICOTERAPIA INDIVIDUAL</option>
-            <option value="4180">SESSAO DE PSICOPEDAGOGIA INDIVIDUAL</option>
-            <option value="4187">SESSAO DE PSICOMOTRICIDADE INDIVIDUAL</option>
-            <option value="4168">CONSULTA EM TERAPIA OCUPACIONAL</option>
-            <option value="4195">SESSAO INDIVIDUAL AMBULATORIAL, EM TERAPIA OCUPACIONAL</option>
-            <option value="4171">SESSAO INDIVIDUAL AMBULATORIAL DE FONOAUDIOLOGIA</option>
-        </select>
-    `;
-    
-    container.appendChild(novoSelect); // Adiciona o novo select ao container
+    // Verifica quantos selects já existem, e limita a 3
+    const selects = container.getElementsByClassName('form-procedimento-select');
+    if (selects.length < 3) { // Limite de 3
+        // Cria um novo select
+        const novoSelect = document.createElement('div');
+        novoSelect.classList.add('form-procedimento-select');
+        
+        novoSelect.innerHTML = `        
+            <select class="form-select procedimento">
+                <option value="">selecione...</option>
+                <option value="1">EM CONSULTORIO (NO HORARIO NORMAL OU PREESTABELECIDO)</option>
+                <option value="2">EM PRONTO SOCORRO</option>
+                <option value="4163">CONSULTA EM PSICOLOGIA</option>
+                <option value="4169">SESSAO DE PSICOTERAPIA INDIVIDUAL</option>
+                <option value="4180">SESSAO DE PSICOPEDAGOGIA INDIVIDUAL</option>
+                <option value="4187">SESSAO DE PSICOMOTRICIDADE INDIVIDUAL</option>
+                <option value="4168">CONSULTA EM TERAPIA OCUPACIONAL</option>
+                <option value="4195">SESSAO INDIVIDUAL AMBULATORIAL, EM TERAPIA OCUPACIONAL</option>
+                <option value="4171">SESSAO INDIVIDUAL AMBULATORIAL DE FONOAUDIOLOGIA</option>
+            </select>
+        `;
+        
+        container.appendChild(novoSelect); // Adiciona o novo select ao container
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Você já atingiu o limite de 3 procedimentos.',
+        });
+        return;
+    }
 });
+
+// Remove o último select de procedimento
+document.getElementById('removeProcedimento').addEventListener('click', function() {
+    const container = document.getElementById('procedimentos-container');
+    
+    // Verifica se há mais de um select para remover
+    const selects = container.getElementsByClassName('form-procedimento-select');
+    if (selects.length > 1) {
+        container.removeChild(selects[selects.length - 1]); // Remove o último select
+    }
+});
+
 
 // Remove o último select de procedimento
 document.getElementById('removeProcedimento').addEventListener('click', function() {
