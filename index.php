@@ -38,6 +38,8 @@ include 'queries/buscarUnidades.php';  // Consulta as unidades
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.min.js"></script>
 
+<!-- ADD SWEETALERT2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 

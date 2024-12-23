@@ -251,6 +251,52 @@ $(document).ready(function () {
             this.classList.toggle('active');
         });
     });
+});
 
+// Função de Validação dos campos para cadastrar agenda
 
+document.querySelector('#div-button button[type="submit"]').addEventListener('click', function (e) {
+    e.preventDefault(); // Evita o envio do formulário diretamente
+
+    // Seleção dos campos
+    const vigenciaInicio = document.getElementById('vigencia-inicio').value.trim();
+    const vigenciaFim = document.getElementById('vigencia-fim').value.trim();
+    const tipo = document.getElementById('tipo').value.trim();
+    const contratacao = document.getElementById('contratacao').value.trim();
+    const beneficiarios = document.getElementById('beneficiarios').value.trim();
+    const especialidade = document.getElementById('especialidade').value.trim();
+
+    // Verifica se ao menos um dia foi selecionado
+    const diasSelecionados = document.querySelectorAll('#dias button.active').length > 0;
+
+    // Validação dos campos
+    if (!vigenciaInicio || !vigenciaFim || !tipo || !contratacao || !beneficiarios || !especialidade || !diasSelecionados) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Por favor, preencha todos os campos antes de cadastrar a agenda!',
+        });
+        return;
+    }
+
+    // Exibe sucesso caso todos os campos estejam preenchidos
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Agenda cadastrada com sucesso!',
+        showConfirmButton: false,
+        timer: 3500
+    });
+
+    // Verificando se a quantidade de beneficiário é zero
+    if (beneficiarios == 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'A quantidade de beneficiário que serão atendidos não pode ser 0 (zero)!',
+        });
+        return;
+    }
+
+    // Aqui você pode inserir a lógica para enviar os dados ao backend
 });
