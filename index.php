@@ -23,6 +23,8 @@ switch ($section) {
 // $stmt = $conn->prepare($sql);
 // $stmt->execute();
 // $unidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +34,8 @@ switch ($section) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Agendamento</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_criarAgenda.css">
+    <link rel="stylesheet" href="css/style_agendarAtendimento.css">
     <!--  font-awesome (CDN) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -68,9 +71,9 @@ switch ($section) {
     <div class="container-primario">
 
         <div class="buttons">
-            <div class="btn-option">Criar Agenda</div>
-            <div class="btn-option">Agendar Atendimento</div>
-            <div class="btn-option">3 ou Mais Faltas Seguidas</div>
+            <a href="?section=criarAgenda" class="btn-option">Criar Agenda</a>
+            <a href="?section=agendarAtendimento" class="btn-option">Agendar Atendimento</a>
+            <a href="?section=faltasConsecutivas" class="btn-option">3 ou Mais Faltas Seguidas</a>
         </div>
 
         <div class="container">
@@ -80,7 +83,10 @@ switch ($section) {
     </div>
 
 
-    <script src="js/script.js"></script>
+    <script src="js/criarAgenda.js"></script>
+    <script src="js/botoes.js"></script>
+    <script src="js/agendarAtendimento.js"></script>
+
 
 </body>
 

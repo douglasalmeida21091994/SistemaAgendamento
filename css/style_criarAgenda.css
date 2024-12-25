@@ -48,6 +48,8 @@ body {
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
     transition: all 0.3s ease;
 }
 
@@ -60,8 +62,8 @@ body {
     background-color: #4E7DD2;
     border: 1px solid #4E7DD2;
     color: #fff;
-    scale: 1.1;
-    font-weight: bold;
+    /* scale: 1.1; */
+    /* font-weight: bold; */
 }
 
 

@@ -92,7 +92,7 @@ $(document).ready(function () {
             // console.log(`A unidade selecionada é: ${unidadeId}`)
             buscarMedicos(unidadeId);
         }
-    });    
+    });
 
     // // RETIREI/COMENTEI O SELECIONE DO INDEX
     // if (unidadeSelect.value !== "selecione") {
@@ -176,13 +176,19 @@ $(document).ready(function () {
 
     span.onclick = fecharModal;
 
-    // FUNÇÃO PARA SELECIONAR OS DIAS DA SEMANA
+    // FUNÇÃO PARA SELECIONAR OS DIAS DA SEMANA  ----------------------------- ANTIGA FUNÇÃO PARA SELECIONAR OS DIAS
     document.querySelectorAll('#dias button').forEach(button => {
         button.addEventListener('click', function () {
             this.classList.toggle('selected');
             this.classList.toggle('active'); // Add both classes
         });
     });
+
+    // Quando o formulário for enviado
+    document.getElementById('agenda-form').onsubmit = function () {
+        // Adiciona os dias ao campo "dia_agendamento" antes de enviar o formulário
+        document.querySelector('input[name="dia_agendamento"]').value = diasSelecionados.join(',');
+    };
 
     document.addEventListener('click', function (e) {
         const iconElement = e.target.closest('.criar-agenda');
@@ -274,68 +280,52 @@ $(document).ready(function () {
         // Lógica para enviar os dados ao backend
     });
 
-    // Limitação de selects para procedimentos
-    document.getElementById('add-button').addEventListener('click', function () {
-        const procedimentoSelects = document.querySelectorAll('.procedimento-select');
-        if (procedimentoSelects.length < 3) {
-            adicionarSelectProcedimento();
+    // Adiciona um novo select para procedimento
+    document.getElementById('addProcedimento').addEventListener('click', function () {
+        const container = document.getElementById('procedimentos-container');
+
+        // Verifica quantos selects já existem, e limita a 3
+        const selects = container.getElementsByClassName('form-procedimento-select');
+        if (selects.length < 3) { // Limite de 3
+            // Cria um novo select
+            const novoSelect = document.createElement('div');
+            novoSelect.classList.add('form-procedimento-select');
+
+            novoSelect.innerHTML = `        
+            <select class="form-select procedimento">
+                <option value="">selecione...</option>
+                <option value="1">EM CONSULTORIO (NO HORARIO NORMAL OU PREESTABELECIDO)</option>
+                <option value="2">EM PRONTO SOCORRO</option>
+                <option value="4163">CONSULTA EM PSICOLOGIA</option>
+                <option value="4169">SESSAO DE PSICOTERAPIA INDIVIDUAL</option>
+                <option value="4180">SESSAO DE PSICOPEDAGOGIA INDIVIDUAL</option>
+                <option value="4187">SESSAO DE PSICOMOTRICIDADE INDIVIDUAL</option>
+                <option value="4168">CONSULTA EM TERAPIA OCUPACIONAL</option>
+                <option value="4195">SESSAO INDIVIDUAL AMBULATORIAL, EM TERAPIA OCUPACIONAL</option>
+                <option value="4171">SESSAO INDIVIDUAL AMBULATORIAL DE FONOAUDIOLOGIA</option>
+            </select>
+        `;
+
+            container.appendChild(novoSelect); // Adiciona o novo select ao container
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Você já atingiu o limite de 3 procedimentos.',
+            });
+            return;
         }
     });
-    
-});
 
-    // ATIVANDO OS BOTÕES
-$(document).ready(function () {
-    // Inicializa variáveis
-    const buttons = document.querySelectorAll('.btn-option');
-    const sections = document.querySelectorAll('section');
+    // Remove o último select de procedimento
+    document.getElementById('removeProcedimento').addEventListener('click', function () {
+        const container = document.getElementById('procedimentos-container');
 
-    // Função para ativar o botão e mostrar a seção correspondente
-    function ativarBotao(botaoClicado) {
-        // Remove a classe ativa de todos os botões e oculta todas as seções
-        buttons.forEach(btn => btn.classList.remove('active'));
-        sections.forEach(sec => sec.classList.add('hidden'));
-
-        // Adiciona a classe ativa ao botão clicado e exibe a seção correspondente
-        botaoClicado.classList.add('active');
-        const sectionId = botaoClicado.textContent.trim().toLowerCase().replace(/\s+/g, '-');
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-            targetSection.classList.remove('hidden');
+        // Verifica se há mais de um select para remover
+        const selects = container.getElementsByClassName('form-procedimento-select');
+        if (selects.length > 1) {
+            container.removeChild(selects[selects.length - 1]); // Remove o último select
         }
-    }
-
-    // Adiciona eventos de clique aos botões
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            ativarBotao(this);
-        });
     });
 
-    // Define o botão "Criar Agenda" como ativo por padrão
-    const defaultButton = document.querySelector('.btn-option:nth-child(1)');
-    if (defaultButton) {
-        ativarBotao(defaultButton);
-    }
-
-    // Manter o comportamento de modal ativo
-    const modal = document.getElementById('agenda-modal');
-    const span = document.querySelector('.close');
-
-    span.onclick = function () {
-        modal.classList.remove('modal-active');
-        document.body.style.overflow = '';
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 300);
-    };
-
-    // Remover a classe 'active' nos botões de dia de forma similar
-    const botoesDias = document.querySelectorAll('#dias button');
-    botoesDias.forEach(botao => {
-        botao.addEventListener('click', function () {
-            // Alternar a classe 'active' ao clicar
-            this.classList.toggle('active');
-        });
-    });
 });

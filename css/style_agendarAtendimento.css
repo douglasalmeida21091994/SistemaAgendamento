@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    /* background-color: black; */
+    background-color: #fff;
+    padding: 0;    
+}
+.container-sec {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red;     */
+}
+
+#Agendar_Atendimento {
+    background-color: #dddddd;
+    width: 800px;
+    margin-bottom: 0px;
+}
+
